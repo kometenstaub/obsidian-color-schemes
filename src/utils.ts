@@ -13,7 +13,8 @@ export function applyAllCss (settings: ColorSchemeSettings) {
 
 
 	// create a style element
-	document.documentElement.querySelector('head')?.createEl('style', {type: 'text/css', text: styleText})
+	//@ts-expect-error,...
+	document.documentElement.querySelector('head').createEl('style', {type: 'text/css', text: styleText}).id = 'color-styles'
 	/*
 	let root = getRoot('light')
 	if (root !== null) {
@@ -29,6 +30,9 @@ export function applyAllCss (settings: ColorSchemeSettings) {
 	 */
 }
 
+// hacky, but should yield better performance when only changing an element
+// requires reload to only work for chosen mode
+
 export function applySingleCss (mode: string, key: string, value: string) {
 	const root = getRoot(mode)
 	root?.style.setProperty(key, value);
@@ -36,4 +40,8 @@ export function applySingleCss (mode: string, key: string, value: string) {
 
 function getRoot(mode: string): HTMLElement | null {
 	return document.querySelector(`:root .theme-${mode}`)
+}
+
+export function removeStyleTag() {
+	document.querySelector('#color-styles')?.detach()
 }

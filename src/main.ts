@@ -1,20 +1,23 @@
 import { App, Plugin } from 'obsidian';
 import type { ColorSchemeSettings } from './interfaces';
-import TemplateSettingTab from './settings';
-import {applyAllCss} from "./utils";
+import ColorSchemeSettingsTab from './settings';
+import {applyAllCss, removeStyleTag} from "./utils";
 import {DEFAULT_SETTINGS} from "./interfaces";
 
 
 export default class ColorSchemePlugin extends Plugin {
 	//@ts-expect-error,...
 	settings: ColorSchemeSettings;
+	settingsTab!: ColorSchemeSettingsTab;
 
 	async onload() {
 		console.log('loading Color Schemes plugin');
 
 		await this.loadSettings();
 
-		this.addSettingTab(new TemplateSettingTab(this.app, this));
+		this.settingsTab = new ColorSchemeSettingsTab(this.app, this)
+
+		this.addSettingTab(this.settingsTab);
 
 		applyAllCss(this.settings)
 
@@ -22,6 +25,7 @@ export default class ColorSchemePlugin extends Plugin {
 
 	onunload() {
 		console.log('unloading Color Schemes plugin');
+		removeStyleTag()
 	}
 
 	async loadSettings() {
