@@ -21,9 +21,12 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 			text: ' Color Scheme',
 		});
 
+
 		// from Obsidian Style settings by mgmeyers, slightly modified, 2022/03/15
 		new Setting(containerEl).then((setting) => {
 			// Build and import link to open the import modal
+			setting.controlEl.createEl('span', {text: 'You may need to reload Obsidian after importing',
+			cls: 'color-settings-notice'})
 			setting.controlEl.createEl(
 				"a",
 				{
