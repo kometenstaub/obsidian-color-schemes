@@ -1,9 +1,9 @@
 {
-	"id": "",
-	"name": "",
+	"id": "color-schemes",
+	"name": "Color Schemes",
 	"version": "0.0.0",
 	"minAppVersion": "0.12.19",
-	"description": "",
+	"description": "Color schemes.",
 	"author": "kometenstaub",
 	"authorUrl": "https://github.com/kometenstaub",
 	"isDesktopOnly": false

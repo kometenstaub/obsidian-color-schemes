@@ -1,23 +1,27 @@
 import { App, Plugin } from 'obsidian';
 import type { ColorSchemeSettings } from './interfaces';
 import TemplateSettingTab from './settings';
+import {applyAllCss} from "./utils";
+import {DEFAULT_SETTINGS} from "./interfaces";
 
-const DEFAULT_SETTINGS: ColorSchemeSettings = {};
 
 export default class ColorSchemePlugin extends Plugin {
 	//@ts-expect-error,...
 	settings: ColorSchemeSettings;
 
 	async onload() {
-		console.log('loading ... plugin');
+		console.log('loading Color Schemes plugin');
 
 		await this.loadSettings();
 
 		this.addSettingTab(new TemplateSettingTab(this.app, this));
+
+		applyAllCss(this.settings)
+
 	}
 
 	onunload() {
-		console.log('unloading ... plugin');
+		console.log('unloading Color Schemes plugin');
 	}
 
 	async loadSettings() {
