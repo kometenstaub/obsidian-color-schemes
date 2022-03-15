@@ -37,6 +37,11 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 			text: ' Color Scheme',
 		});
 
+		containerEl.createDiv({
+			text: 'Changes will get applied automatically. To properly apply them after you\'re finished, you need to reload Obsidian.'
+		})
+		containerEl.createEl('br')
+
 		// from Obsidian Style settings by mgmeyers, slightly modified, 2022/03/15
 		new Setting(containerEl).then((setting) => {
 			// Build and import link to open the import modal
@@ -80,6 +85,15 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 			);
 		});
 		// end of Obsidian Style settings by mgmeyers, slightly modified, 2022/03/15
+
+		new Setting(containerEl)
+			.addButton((button) => {
+				button.setButtonText('Reset to default settings (may require a reload)')
+					.onClick(async (evt) => {
+					this.plugin.settings = DEFAULT_SETTINGS
+					await this.plugin.saveSettings()
+				})
+			})
 
 		containerEl.createEl('h3', {
 			text: 'Light mode variables',
