@@ -128,53 +128,58 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 				}})
 			picker.addEventListener('input', async (e) => {
 				const value = e.target.value
-				if (mode === settings.lightVars) {
-					if (value.trim() === '') {
-						settings.lightVars[currentKey] =
-							DEFAULT_SETTINGS.lightVars[currentKey];
-						await this.plugin.saveSettings();
-						applySingleCss(
-							'light',
-							Object.keys(mode)[i],
-							DEFAULT_SETTINGS.lightVars[currentKey]
-						);
-						// doesn't work
-						//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
-					} else {
-						settings.lightVars[currentKey] =
-							value;
-						await this.plugin.saveSettings();
-						applySingleCss(
-							'light',
-							Object.keys(mode)[i],
-							value
-						);
-					}
-				} else {
-					if (value.trim() === '') {
-						settings.darkVars[currentKey] =
-							DEFAULT_SETTINGS.darkVars[currentKey];
-						await this.plugin.saveSettings();
-						applySingleCss(
-							'dark',
-							Object.keys(mode)[i],
-							DEFAULT_SETTINGS.darkVars[currentKey]
-						);
-						// doesn't work
-						//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
-					} else {
-						settings.darkVars[currentKey] =
-							value;
-						await this.plugin.saveSettings();
-						applySingleCss(
-							'dark',
-							Object.keys(mode)[i],
-							value
-						);
-					}
-				}
+				await this.evFunc(value, mode, i, currentKey, settings)
 			})
 		}
+	}
+
+	async evFunc(value: any, mode: Record<string, string>, i:number, currentKey:string, settings:ColorSchemeSettings) {
+		if (mode === settings.lightVars) {
+			if (value.trim() === '') {
+				settings.lightVars[currentKey] =
+					DEFAULT_SETTINGS.lightVars[currentKey];
+				await this.plugin.saveSettings();
+				applySingleCss(
+					'light',
+					Object.keys(mode)[i],
+					DEFAULT_SETTINGS.lightVars[currentKey]
+				);
+				// doesn't work
+				//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
+			} else {
+				settings.lightVars[currentKey] =
+					value;
+				await this.plugin.saveSettings();
+				applySingleCss(
+					'light',
+					Object.keys(mode)[i],
+					value
+				);
+			}
+		} else {
+			if (value.trim() === '') {
+				settings.darkVars[currentKey] =
+					DEFAULT_SETTINGS.darkVars[currentKey];
+				await this.plugin.saveSettings();
+				applySingleCss(
+					'dark',
+					Object.keys(mode)[i],
+					DEFAULT_SETTINGS.darkVars[currentKey]
+				);
+				// doesn't work
+				//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
+			} else {
+				settings.darkVars[currentKey] =
+					value;
+				await this.plugin.saveSettings();
+				applySingleCss(
+					'dark',
+					Object.keys(mode)[i],
+					value
+				);
+			}
+		}
+
 	}
 }
 
