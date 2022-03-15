@@ -122,11 +122,27 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 				cls: 'color-settings-picker'
 			});
 			*/
+			const revertEl = variable.controlEl.createEl('button', {
+				cls: 'color-settings-revert-button',
+				text: 'Revert to default'
+			})
 
 			const picker = variable.controlEl.createEl('input', {attr: {
 					type: 'color', value: (mode === settings.lightVars) ? settings.lightVars[currentKey] : settings.darkVars[currentKey]
 				}})
+			revertEl.addEventListener('click', async (e) => {
+				await this.evFunc('', mode, i, currentKey, settings)
+				if (mode === settings.lightVars) {
+					picker.value = settings.lightVars[currentKey] = DEFAULT_SETTINGS.lightVars[currentKey]
+				} else {
+					picker.value = settings.darkVars[currentKey] = DEFAULT_SETTINGS.darkVars[currentKey]
+				}
+			} )
 			picker.addEventListener('input', async (e) => {
+				const value = e.target.value
+				await this.evFunc(value, mode, i, currentKey, settings)
+			})
+			picker.addEventListener('change', async (e) => {
 				const value = e.target.value
 				await this.evFunc(value, mode, i, currentKey, settings)
 			})
