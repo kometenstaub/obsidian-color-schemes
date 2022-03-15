@@ -107,60 +107,73 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 
 	async createSettings(mode: Record<string, string>) {
 		for (let i = 0; i <= Object.keys(mode).length - 1; i++) {
+			const { settings } = this.plugin
 			const currentKey = Object.keys(mode)[i];
-			new Setting(this.containerEl)
+			const variable = new Setting(this.containerEl)
 				.setName(Object.keys(mode)[i])
-				.addText((text) => {
-					text.setValue(Object.values(mode)[i]).onChange(
-						async (value) => {
-							if (mode === this.plugin.settings.lightVars) {
-								if (value.trim() === '') {
-									this.plugin.settings.lightVars[currentKey] =
-										DEFAULT_SETTINGS.lightVars[currentKey];
-									await this.plugin.saveSettings();
-									applySingleCss(
-										'light',
-										Object.keys(mode)[i],
-										DEFAULT_SETTINGS.lightVars[currentKey]
-									);
-									// doesn't work
-									//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
-								} else {
-									this.plugin.settings.lightVars[currentKey] =
-										value;
-									await this.plugin.saveSettings();
-									applySingleCss(
-										'light',
-										Object.keys(mode)[i],
-										value
-									);
-								}
-							} else {
-								if (value.trim() === '') {
-									this.plugin.settings.darkVars[currentKey] =
-										DEFAULT_SETTINGS.darkVars[currentKey];
-									await this.plugin.saveSettings();
-									applySingleCss(
-										'dark',
-										Object.keys(mode)[i],
-										DEFAULT_SETTINGS.darkVars[currentKey]
-									);
-									// doesn't work
-									//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
-								} else {
-									this.plugin.settings.darkVars[currentKey] =
-										value;
-									await this.plugin.saveSettings();
-									applySingleCss(
-										'dark',
-										Object.keys(mode)[i],
-										value
-									);
-								}
-							}
-						}
-					);
-				});
+			//.addText((text) => {
+			//text.setValue(Object.values(mode)[i]).onChange(
+			//	async (value) => {
+			//	}
+			//);
+		;
+			/*
+		const colorPicker = this.containerEl.createDiv({
+				cls: 'color-settings-picker'
+			});
+			*/
+
+			const picker = variable.controlEl.createEl('input', {attr: {
+					type: 'color', value: (mode === settings.lightVars) ? settings.lightVars[currentKey] : settings.darkVars[currentKey]
+				}})
+			picker.addEventListener('input', async (e) => {
+				const value = e.target.value
+				if (mode === settings.lightVars) {
+					if (value.trim() === '') {
+						settings.lightVars[currentKey] =
+							DEFAULT_SETTINGS.lightVars[currentKey];
+						await this.plugin.saveSettings();
+						applySingleCss(
+							'light',
+							Object.keys(mode)[i],
+							DEFAULT_SETTINGS.lightVars[currentKey]
+						);
+						// doesn't work
+						//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
+					} else {
+						settings.lightVars[currentKey] =
+							value;
+						await this.plugin.saveSettings();
+						applySingleCss(
+							'light',
+							Object.keys(mode)[i],
+							value
+						);
+					}
+				} else {
+					if (value.trim() === '') {
+						settings.darkVars[currentKey] =
+							DEFAULT_SETTINGS.darkVars[currentKey];
+						await this.plugin.saveSettings();
+						applySingleCss(
+							'dark',
+							Object.keys(mode)[i],
+							DEFAULT_SETTINGS.darkVars[currentKey]
+						);
+						// doesn't work
+						//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
+					} else {
+						settings.darkVars[currentKey] =
+							value;
+						await this.plugin.saveSettings();
+						applySingleCss(
+							'dark',
+							Object.keys(mode)[i],
+							value
+						);
+					}
+				}
+			})
 		}
 	}
 }

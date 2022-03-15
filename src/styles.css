@@ -48,6 +48,12 @@
 	color: var(--text-accent-hover);
 }
 
+.color-settings-picker {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+
 .color-settings-notice,
 .color-settings-export,
 .color-settings-import {
