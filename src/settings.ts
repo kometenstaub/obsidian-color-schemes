@@ -124,7 +124,7 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 			*/
 			const revertEl = variable.controlEl.createEl('button', {
 				cls: 'color-settings-revert-button',
-				text: 'Revert to default'
+				text: 'Reset to default'
 			})
 
 			const picker = variable.controlEl.createEl('input', {attr: {
