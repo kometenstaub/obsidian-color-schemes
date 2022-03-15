@@ -1,10 +1,10 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
-import type TemplatePlugin from './main';
+import type ColorSchemePlugin from './main';
 
 export default class TemplateSettingTab extends PluginSettingTab {
-	plugin: TemplatePlugin;
+	plugin: ColorSchemePlugin;
 
-	constructor(app: App, plugin: TemplatePlugin) {
+	constructor(app: App, plugin: ColorSchemePlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}

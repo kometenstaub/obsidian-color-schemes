@@ -1,12 +1,12 @@
 import { App, Plugin } from 'obsidian';
-import type { TemplateSettings } from './interfaces';
+import type { ColorSchemeSettings } from './interfaces';
 import TemplateSettingTab from './settings';
 
-const DEFAULT_SETTINGS: TemplateSettings = {};
+const DEFAULT_SETTINGS: ColorSchemeSettings = {};
 
-export default class TemplatePlugin extends Plugin {
-	//@ts-ignore
-	settings: TemplateSettings;
+export default class ColorSchemePlugin extends Plugin {
+	//@ts-expect-error,...
+	settings: ColorSchemeSettings;
 
 	async onload() {
 		console.log('loading ... plugin');
