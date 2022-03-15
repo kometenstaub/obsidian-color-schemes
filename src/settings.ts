@@ -38,9 +38,9 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 		});
 
 		containerEl.createDiv({
-			text: 'Changes will get applied automatically. To properly apply them after you\'re finished, you need to reload Obsidian.'
-		})
-		containerEl.createEl('br')
+			text: "Changes will get applied automatically. To properly apply them after you're finished, you need to reload Obsidian.",
+		});
+		containerEl.createEl('br');
 
 		// from Obsidian Style settings by mgmeyers, slightly modified, 2022/03/15
 		new Setting(containerEl).then((setting) => {
@@ -86,14 +86,16 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 		});
 		// end of Obsidian Style settings by mgmeyers, slightly modified, 2022/03/15
 
-		new Setting(containerEl)
-			.addButton((button) => {
-				button.setButtonText('Reset to default settings (may require a reload)')
-					.onClick(async (evt) => {
-					this.plugin.settings = DEFAULT_SETTINGS
-					await this.plugin.saveSettings()
-				})
-			})
+		new Setting(containerEl).addButton((button) => {
+			button
+				.setButtonText(
+					'Reset to default settings (may require a reload)'
+				)
+				.onClick(async (evt) => {
+					this.plugin.settings = DEFAULT_SETTINGS;
+					await this.plugin.saveSettings();
+				});
+		});
 
 		containerEl.createEl('h3', {
 			text: 'Light mode variables',
@@ -107,16 +109,16 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 
 	async createSettings(mode: Record<string, string>) {
 		for (let i = 0; i <= Object.keys(mode).length - 1; i++) {
-			const { settings } = this.plugin
+			const { settings } = this.plugin;
 			const currentKey = Object.keys(mode)[i];
-			const variable = new Setting(this.containerEl)
-				.setName(Object.keys(mode)[i])
+			const variable = new Setting(this.containerEl).setName(
+				Object.keys(mode)[i]
+			);
 			//.addText((text) => {
 			//text.setValue(Object.values(mode)[i]).onChange(
 			//	async (value) => {
 			//	}
 			//);
-		;
 			/*
 		const colorPicker = this.containerEl.createDiv({
 				cls: 'color-settings-picker'
@@ -124,34 +126,48 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 			*/
 			const revertEl = variable.controlEl.createEl('button', {
 				cls: 'color-settings-revert-button',
-				text: 'Reset to default'
-			})
+				text: 'Reset to default',
+			});
 
-			const picker = variable.controlEl.createEl('input', {attr: {
-					type: 'color', value: (mode === settings.lightVars) ? settings.lightVars[currentKey] : settings.darkVars[currentKey]
-				}})
+			const picker = variable.controlEl.createEl('input', {
+				attr: {
+					type: 'color',
+					value:
+						mode === settings.lightVars
+							? settings.lightVars[currentKey]
+							: settings.darkVars[currentKey],
+				},
+			});
 			revertEl.addEventListener('click', async (e) => {
-				await this.evFunc('', mode, i, currentKey, settings)
+				await this.evFunc('', mode, i, currentKey, settings);
 				if (mode === settings.lightVars) {
-					picker.value = settings.lightVars[currentKey] = DEFAULT_SETTINGS.lightVars[currentKey]
+					picker.value = settings.lightVars[currentKey] =
+						DEFAULT_SETTINGS.lightVars[currentKey];
 				} else {
-					picker.value = settings.darkVars[currentKey] = DEFAULT_SETTINGS.darkVars[currentKey]
+					picker.value = settings.darkVars[currentKey] =
+						DEFAULT_SETTINGS.darkVars[currentKey];
 				}
-			} )
+			});
 			picker.addEventListener('input', async (e) => {
 				//@ts-expect-error,...
-				const value = e.target.value
-				await this.evFunc(value, mode, i, currentKey, settings)
-			})
+				const value = e.target.value;
+				await this.evFunc(value, mode, i, currentKey, settings);
+			});
 			picker.addEventListener('change', async (e) => {
 				//@ts-expect-error,...
-				const value = e.target.value
-				await this.evFunc(value, mode, i, currentKey, settings)
-			})
+				const value = e.target.value;
+				await this.evFunc(value, mode, i, currentKey, settings);
+			});
 		}
 	}
 
-	async evFunc(value: any, mode: Record<string, string>, i:number, currentKey:string, settings:ColorSchemeSettings) {
+	async evFunc(
+		value: any,
+		mode: Record<string, string>,
+		i: number,
+		currentKey: string,
+		settings: ColorSchemeSettings
+	) {
 		if (mode === settings.lightVars) {
 			if (value.trim() === '') {
 				settings.lightVars[currentKey] =
@@ -165,14 +181,9 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 				// doesn't work
 				//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
 			} else {
-				settings.lightVars[currentKey] =
-					value;
+				settings.lightVars[currentKey] = value;
 				await this.plugin.saveSettings();
-				applySingleCss(
-					'light',
-					Object.keys(mode)[i],
-					value
-				);
+				applySingleCss('light', Object.keys(mode)[i], value);
 			}
 		} else {
 			if (value.trim() === '') {
@@ -187,17 +198,11 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 				// doesn't work
 				//text.inputEl.onblur = () => text.setValue(DEFAULT_SETTINGS.lightVars[currentKey])
 			} else {
-				settings.darkVars[currentKey] =
-					value;
+				settings.darkVars[currentKey] = value;
 				await this.plugin.saveSettings();
-				applySingleCss(
-					'dark',
-					Object.keys(mode)[i],
-					value
-				);
+				applySingleCss('dark', Object.keys(mode)[i], value);
 			}
 		}
-
 	}
 }
 
