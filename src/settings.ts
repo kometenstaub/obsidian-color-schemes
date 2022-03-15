@@ -139,10 +139,12 @@ export default class ColorSchemeSettingsTab extends PluginSettingTab {
 				}
 			} )
 			picker.addEventListener('input', async (e) => {
+				//@ts-expect-error,...
 				const value = e.target.value
 				await this.evFunc(value, mode, i, currentKey, settings)
 			})
 			picker.addEventListener('change', async (e) => {
+				//@ts-expect-error,...
 				const value = e.target.value
 				await this.evFunc(value, mode, i, currentKey, settings)
 			})
