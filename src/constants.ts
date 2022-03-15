@@ -65,3 +65,4 @@ export const LIGHT_VARS = {
 	'--scrollbar-bg': 'rgba(0, 0, 0, 0.05)',
 	'--scrollbar-thumb-bg': 'rgba(0, 0, 0, 0.1)',
 };
+export const viewType = 'color-settings';

@@ -5,10 +5,15 @@ import {ColorSchemeSettings, DEFAULT_SETTINGS} from "./interfaces";
 
 export default class ColorSchemeSettingsTab extends PluginSettingTab {
 	plugin: ColorSchemePlugin;
+	containerEl!: HTMLElement;
 
-	constructor(app: App, plugin: ColorSchemePlugin) {
+	constructor(app: App, plugin: ColorSchemePlugin, containerEl?: HTMLElement) {
 		super(app, plugin);
 		this.plugin = plugin;
+		// if given, settings will be added to that element, like a leaf
+		if (containerEl) {
+			this.containerEl = containerEl
+		}
 	}
 
 	display(): void {
