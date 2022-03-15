@@ -1,11 +1,10 @@
 import { App, Plugin } from 'obsidian';
 import type { ColorSchemeSettings } from './interfaces';
 import ColorSchemeSettingsTab from './settings';
-import {applyAllCss, removeStyleTag} from "./utils";
-import {DEFAULT_SETTINGS} from "./interfaces";
-import SettingsView from "./settings_view";
-import {viewType} from "./constants";
-
+import { applyAllCss, removeStyleTag } from './utils';
+import { DEFAULT_SETTINGS } from './interfaces';
+import SettingsView from './settings_view';
+import { viewType } from './constants';
 
 export default class ColorSchemePlugin extends Plugin {
 	//@ts-expect-error,...
@@ -17,7 +16,7 @@ export default class ColorSchemePlugin extends Plugin {
 
 		await this.loadSettings();
 
-		this.settingsTab = new ColorSchemeSettingsTab(this.app, this)
+		this.settingsTab = new ColorSchemeSettingsTab(this.app, this);
 
 		this.addSettingTab(this.settingsTab);
 
@@ -26,16 +25,14 @@ export default class ColorSchemePlugin extends Plugin {
 		// https://github.com/mgmeyers/obsidian-style-settings/blob/0bd458a1c366dadf6ec68a73e3fae2ac3da91873/src/main.ts#L45
 		// changed id and name
 		this.addCommand({
-			id: "show-color-settings-leaf",
-			name: "Show color settings view",
+			id: 'show-color-settings-leaf',
+			name: 'Show color settings view',
 			callback: () => {
 				this.activateView();
 			},
 		});
 
-
-		applyAllCss(this.settings)
-
+		applyAllCss(this.settings);
 	}
 	deactivateView() {
 		this.app.workspace.detachLeavesOfType(viewType);
@@ -45,26 +42,24 @@ export default class ColorSchemePlugin extends Plugin {
 	// also check for null
 	async activateView() {
 		this.deactivateView();
-		const { activeLeaf } = this.app.workspace
+		const { activeLeaf } = this.app.workspace;
 		if (activeLeaf !== null) {
 			const leaf = this.app.workspace.createLeafBySplit(
 				activeLeaf,
-				"vertical"
+				'vertical'
 			);
 
 			await leaf.setViewState({
 				type: viewType,
 			});
 		} else {
-			return
+			return;
 		}
-
 	}
-
 
 	onunload() {
 		console.log('unloading Color Schemes plugin');
-		removeStyleTag()
+		removeStyleTag();
 	}
 
 	async loadSettings() {

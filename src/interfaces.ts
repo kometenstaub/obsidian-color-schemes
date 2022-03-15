@@ -1,4 +1,4 @@
-import {DARK_VARS, LIGHT_VARS} from "./constants";
+import { DARK_VARS, LIGHT_VARS } from './constants';
 
 // default settings
 
