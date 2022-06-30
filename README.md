@@ -4,7 +4,7 @@ This plugin was an experiment for seeing how feasible it would be to have colour
 
 The experiment proved to be unsuccessful. 
 
-Instead this plugin may now serve a purpose to quickly discover which elements use which colour variables.
+Instead this plugin may now serve a purpose for quickly discovering which elements use which colour variables.
 
 ---
 
