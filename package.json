@@ -30,7 +30,7 @@
 				"section": "Bug Fixes"
 			}
 		],
-		"releaseCommitMessageFormat": "<Sample_Plugin>: {{currentTag}}"
+		"releaseCommitMessageFormat": "Obsidian color schemes: {{currentTag}}"
 	},
 	"keywords": [],
 	"author": "kometenstaub",
