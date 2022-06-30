@@ -1,6 +1,6 @@
 {
 	"name": "color-schemes",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "Color schemes",
 	"main": "src/main.ts",
 	"scripts": {
@@ -14,22 +14,22 @@
 	"standard-version": {
 		"t": "",
 		"types": [
-            {
-                "type": "perf",
-                "hidden": false,
-                "section": "Performance"
-            },
-            {
-                "type": "feat",
-                "hidden": false,
-                "section": "Features"
-            },
-            {
-                "type": "fix",
-                "hidden": false,
-                "section": "Bug Fixes"
-            }
-        ],
+			{
+				"type": "perf",
+				"hidden": false,
+				"section": "Performance"
+			},
+			{
+				"type": "feat",
+				"hidden": false,
+				"section": "Features"
+			},
+			{
+				"type": "fix",
+				"hidden": false,
+				"section": "Bug Fixes"
+			}
+		],
 		"releaseCommitMessageFormat": "<Sample_Plugin>: {{currentTag}}"
 	},
 	"keywords": [],
