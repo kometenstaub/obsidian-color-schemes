@@ -1,6 +1,6 @@
 # Colour Schemes Experiment
 
-This plugin was an experiment for seeing how feasible it would be to have colour schemes in addition to the already existing themes in Obsidian.
+This plugin was an experiment for seeing how feasible it would be to have colour schemes in addition to the already existing themes in Obsidian by only modifying the colour variables. (This may partly be because the colour pickers don't support transparency (alpha)).
 
 The experiment proved to be unsuccessful. 
 
