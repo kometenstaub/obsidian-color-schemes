@@ -2,9 +2,10 @@
 
 This plugin was an experiment for seeing how feasible it would be to have colour schemes in addition to the already existing themes in Obsidian by only modifying the colour variables like how it is possible for terminals.
 
-The experiment proved to be unsuccessful. This may partly be because the colour pickers don't support transparency (alpha).
+**Turns out, there is already a snippet for Style Settings that achieves it: https://github.com/mgmeyers/obsidian-style-settings/blob/main/obsidian-default-theme.css, so this plugin was unnecessary.**
 
-Instead this plugin may now serve a purpose for quickly discovering which elements use which colour variables.
+
+It may now serve a purpose for quickly discovering which elements use which colour variables, as the colours get immediately updated when the colour is changed in the colour picker.
 
 ---
 
